@@ -1,12 +1,10 @@
 import Page from "../pageObject/ppcPage";
-const ppcData = require('../fixtures/ppc.json');
+const ppcData = require("../fixtures/ppc.json");
 
 describe("Power Plus communication website", function () {
-  const pageInstance = new Page();
   it("TestCase 1: Website HomePage", function () {
-  
     cy.visit("https://www.ppc-ag.de/en/");
-    cy.clickAcceptAll();  //custom command 
+    cy.clickAcceptAll(); //custom command
     cy.contains("Power Plus Communications");
     cy.get(".fusion-main-menu>ul>li").should("have.length", 9);
     cy.get(".fusion-main-menu>ul>li").eq(0).should("contain", "Company");
@@ -60,53 +58,47 @@ describe("Power Plus communication website", function () {
     );
     cy.contains("Innovation braucht kluge & kreative Köpfe!");
   });
-  it.only(" Test Case 4:Initiativbewerbung Form", function () {
-    ppcData.forEach((testdata)=>{
-    cy.visit("https://www.ppc-ag.de/de/unternehmen/offene-stellen/");
-    cy.clickAcceptAll();
-    cy.contains("Ihre Initiativbewerbung").click();
-    cy.wait(200);
+  it(" Test Case 4:Initiativbewerbung Form", function () {
+    ppcData.forEach((testdata) => {
+      cy.visit("https://www.ppc-ag.de/de/unternehmen/offene-stellen/");
+      cy.clickAcceptAll();
+      cy.contains("Ihre Initiativbewerbung").click();
+      cy.wait(200);
 
-    cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body").contains(
-      "WIR FREUEN UNS AUF SIE!"
-    );
-    cy.get(pageInstance.form)
-      .find('input[name="vorname"]')
-      .click()
-      .type(testdata.name);
-    cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
-      .find('input[name="nachname"]')
-      .click()
-      .type(testdata.lastname);
-    cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
-      .find('input[name="your-email"]')
-      .click()
-      .type(testdata.email);
-    cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
-      .find('input[name="telefonnummer"]')
-      .click()
-      .type(testdata.phone);
-    cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
-      .find('input[name="eintritt"]')
-      .click()
-      .type(testdata.entrydate);
-    cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
-      .find('input[name="gehalt"]')
-      .click()
-      .type(testdata.gehalt);
-    cy.get(
-      ':nth-child(1) > [style="padding-right:7px;"] > label > .wpcf7-form-control-wrap > .codedropz-upload-wrapper > .codedropz-upload-handler > .codedropz-upload-container > .codedropz-upload-inner > .codedropz-btn-wrap > .cd-upload-btn'
-    ).click();
-    cy.get(
-      ':nth-child(1) > [style="padding-right:7px;"] > label > .wpcf7-form-control-wrap > .codedropz-upload-wrapper > .wpcf7-form-control'
-    )
-      .click({ force: true })
-      .selectFile("/Users/nehajain/Downloads/cv.pdf", { force: true });
-    cy.wait(200);
+      cy.find_form().contains("WIR FREUEN UNS AUF SIE!");
+      cy.find_form().find('input[name="vorname"]').click().type(testdata.name);
+      cy.find_form()
+        .find('input[name="nachname"]')
+        .click()
+        .type(testdata.lastname);
+      cy.find_form()
+        .find('input[name="your-email"]')
+        .click()
+        .type(testdata.email);
+      cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
+        .find('input[name="telefonnummer"]')
+        .click()
+        .type(testdata.phone);
+      cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
+        .find('input[name="eintritt"]')
+        .click()
+        .type(testdata.entrydate);
+      cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
+        .find('input[name="gehalt"]')
+        .click()
+        .type(testdata.gehalt);
+      cy.get(
+        ':nth-child(1) > [style="padding-right:7px;"] > label > .wpcf7-form-control-wrap > .codedropz-upload-wrapper > .codedropz-upload-handler > .codedropz-upload-container > .codedropz-upload-inner > .codedropz-btn-wrap > .cd-upload-btn'
+      ).click();
+      cy.get(
+        ':nth-child(1) > [style="padding-right:7px;"] > label > .wpcf7-form-control-wrap > .codedropz-upload-wrapper > .wpcf7-form-control'
+      )
+        .click({ force: true })
+        .selectFile("/Users/nehajain/Downloads/cv.pdf", { force: true });
+      cy.wait(200);
 
-    // Bewerbung abschicken
-    //cy.get('.modal-1 > .modal-dialog > .modal-content > .modal-body').find('input[value="Bewerbung abschicken"]').click();
+      // Bewerbung abschicken
+      //cy.get('.modal-1 > .modal-dialog > .modal-content > .modal-body').find('input[value="Bewerbung abschicken"]').click();
     });
   });
-
 });
