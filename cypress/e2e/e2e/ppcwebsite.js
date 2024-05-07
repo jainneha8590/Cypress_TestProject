@@ -2,7 +2,7 @@ import Page from "../pageObject/ppcPage";
 const ppcData = require('../fixtures/ppc.json');
 
 describe("Power Plus communication website", function () {
-    const pageInstance = new Page();
+  const pageInstance = new Page();
   it("TestCase 1: Website HomePage", function () {
   
     cy.visit("https://www.ppc-ag.de/en/");
@@ -70,7 +70,7 @@ describe("Power Plus communication website", function () {
     cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body").contains(
       "WIR FREUEN UNS AUF SIE!"
     );
-    cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
+    cy.get(pageInstance.form)
       .find('input[name="vorname"]')
       .click()
       .type(testdata.name);
@@ -93,7 +93,7 @@ describe("Power Plus communication website", function () {
     cy.get(".modal-1 > .modal-dialog > .modal-content > .modal-body")
       .find('input[name="gehalt"]')
       .click()
-      .type("65000");
+      .type(testdata.gehalt);
     cy.get(
       ':nth-child(1) > [style="padding-right:7px;"] > label > .wpcf7-form-control-wrap > .codedropz-upload-wrapper > .codedropz-upload-handler > .codedropz-upload-container > .codedropz-upload-inner > .codedropz-btn-wrap > .cd-upload-btn'
     ).click();

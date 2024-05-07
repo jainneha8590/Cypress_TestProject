@@ -15,7 +15,11 @@ class Page {
     job_link(){
         return cy.get ('.qtranxs-available-language-link-de')
     }
-   
+    form(){
+        return cy.get ('.modal-1 > .modal-dialog > .modal-content > .modal-body')
+    }
+
+
 }
 
 export default Page;
